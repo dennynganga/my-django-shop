@@ -1,0 +1,13 @@
+<div id="searchresults">
+	{% if search_results %}
+		{% for result in search_results %}
+			<a href="/products/{{ result.slug }}">
+				<img src="/media/{{ result.main_image }}" class="floatleft" alt="account photo" />
+					{{ result.name }} <br />
+					<span class="little-about">{{ result.short_description }}.</span>  
+			</a>
+		{% endfor %}
+	{% else %}
+		No match found.
+	{% endif %}
+</div>

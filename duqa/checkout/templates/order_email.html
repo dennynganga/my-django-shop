@@ -1,0 +1,14 @@
+Dear Customer,
+<p>
+This is to notify you that your order has been received by the Electronix
+Sales Team and will be processed as soon as possible. Estimated delivery date is 20/10/2013.
+Your order is as follows ({{ number }} item{{ number | pluralize }}): </p>
+<ol>
+	{% for item in items %}
+	<li>{{ item.product.name }}</li>
+	{% endfor %}
+</ol>
+Thank you for shopping with us.
+Yours sincerely,
+Electronix.
+

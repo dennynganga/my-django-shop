@@ -1,0 +1,67 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.mobile-1.4.0.min.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css" />
+	<script src="{{ STATIC_URL }}js/jquery-2.0.3.min.js"></script>
+	<script src="{{ STATIC_URL }}js/jquery.mobile-1.4.0.min.js"></script>
+</head>
+
+<body>
+	<div data-role="page" id="latest-products" data-url="demo-page">
+	<div data-role="header" style="overflow:hidden;">
+		<h1> </h1>
+		<a href="#left-panel" data-icon="bars" data-iconpos="notext">Open left panel</a>
+    <a href="#" data-icon="shop" class="ui-btn-right">3</a>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#" class="ui-btn-active">Latest Products</a></li>
+            <li><a href="#">Most Popular</a></li>
+            <li><a href="#">Recommended</a></li>
+        </ul>
+    </div><!-- /navbar -->
+</div><!-- /header -->
+<div class="ui-grid-a">
+    <!--<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>-->
+</div><!-- /grid-a -->
+<div data-role="panel" id="left-panel" data-display="overlay" data-theme="a">
+        Browse by category list here.
+    </div><!-- /panel -->
+</div>
+
+<script>
+	$(function(){
+		$.ajax({
+			type: 'GET',
+			url: "{% url 'catalog.views.json_products' %}",
+			dataType: 'json',
+			success: function(latest_products){
+				var serializedJson = JSON.parse(JSON.stringify(latest_products));
+				for ( var i = 0; i < serializedJson.length; i+=2 ) {
+					$('.ui-grid-a').append('<div class="ui-block-a"><div class="grid">' +
+										   '<div class="imgholder"><img src="/media/' + serializedJson[i].main_image + '"/></div>' +
+										   '<a class="product-name" href="#">' + serializedJson[i].name + '</a></div></div>' +
+								           '<div class="ui-block-b"><div class="grid">' +
+								           '<div class="imgholder"><img src="/media/' + serializedJson[i+1].main_image + '"/></div></div></div>' );
+				}
+			}
+		})
+	});
+	
+	$.mobile.page.prototype.options.domCache = true;
+	
+	$(document).on("pagecreate", "#latest-products", function(){
+		$(document).on("swiperight", "#latest-products", function(e){
+			if($(".ui-page-active").jqmData("panel") !== "open") {
+			if( e.type === "swiperight" ) {
+				$("#left-panel").panel("open");
+			}
+		}
+		});	
+		});
+</script>
+</body>
+</html>

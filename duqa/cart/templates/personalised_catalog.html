@@ -1,0 +1,12 @@
+{% load humanize %}
+<div class="category_title span7"><i class="glyphicon-down-arrow"></i> <strong>Popular Products</strong></div>
+{% for each in popular_products %}
+	<div class="grid span2 product">
+		<div class="imgholder">
+			<img src="{{ each.product.main_image.url }}" />
+		</div>
+		<a class="product-name">{{ each.product.name }}</a> <br />
+		<span class="price">Kshs {{ each.product.price | intcomma }}</span>
+		<a class="add btn btn-primary" data-item="{{ each.product.id }}"><i class="w-glyphicon-circle-plus"></i> Add to cart</a>
+	</div>
+{% endfor %}

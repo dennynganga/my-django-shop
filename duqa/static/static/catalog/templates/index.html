@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title%} Home {% endblock %}
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.tiles.min.css"/>
+{% endblock %}
+	
+{% block new_products_slideshow %}
+	<div class="slider-wrap">
+    	<div class="slider">
+      		<img src="{{ STATIC_URL }}images/Alienware.jpg"/><p>The Alienware laptop. Most powerful PC. <a class="btn btn-primary"><i class="glyphicon-circle-plus"></i> Add to cart</a> </p>
+        	<img src="{{ STATIC_URL }}images/samsung.jpg"/><p><a class="btn btn-primary"><i class="glyphicon-circle-plus"></i> Add to cart</a></p>
+        	<img src=""/><p><strong>Pork turkey:</strong> shoulder, filet mignon chuck t-bone bacon.</p>
+        	<img src="img/img04.jpg"/><p><strong>Short loin:</strong> pig jowl fatback, pork loin pork chop.</p>
+        	<img src="img/img05.jpg"/><p><strong>Sausage:</strong> ground round sirloin ball tip beef ribs.</p>
+      	</div>
+    </div>
+{% endblock %}
+    	
+{% block main_content %}
+	<div class="mainContent span7">
+		<div class="category_title span6"><i class="glyphicon-down-arrow"></i> <strong>Latest Products</strong></div>
+    	{% for each in products %}
+    		<div class="grid span2">
+    			<strong>{{ each.name }}</strong>
+				<div class="imgholder">
+					<img src="{{ MEDIA_URL }}{{ each.main_image }}" />
+				</div>
+				<span class="price">Kshs {{ each.price | intcomma }}</span>
+				<a class="add btn btn-primary" data-item="{{ each.id }}"><i class="w-glyphicon-circle-plus"></i> Add to cart</a>
+			</div>
+		{% endfor %}
+    </div>
+{% endblock %}
+    
+{% block extra_js%}
+	<script src="{{ STATIC_URL }}js/jquery.tiles.min.js"></script>
+
+	<script>
+		
+		
+	</script>
+{% endblock %}
+

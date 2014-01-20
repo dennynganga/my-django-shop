@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title%} Home {% endblock %}
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.tiles.min.css"/>
+{% endblock %}
+
+{% block device_detect %}
+	<script>
+			var mobile = (/iphone | ipad | android | blackberry/i.test(navigator.userAgent.toLowerCase()));
+			if (!mobile) {
+				window.location.replace("/m.home");
+			}
+			/*else {
+				window.location.replace("");
+			}*/
+		</script>
+{% endblock %}
+	
+{% block new_products_slideshow %}
+	<div class="slider-wrap">
+    	<div class="slider">
+      		<img src="{{ STATIC_URL }}images/Alienware.jpg"/><p>The Alienware laptop. Most powerful PC. </p>
+        	<img src="{{ STATIC_URL }}images/GALAXY_S4.jpg"/><p>The Life Companion</p>
+      	</div>
+    </div>
+{% endblock %}
+    	
+{% block main_content %}
+	<div class="mainContent span7">
+		<div class="category_title span6"><i class="glyphicon-down-arrow"></i> <strong>Latest Products</strong></div>
+    	{% for each in products %}
+    		<div class="grid span2 product">
+				<div class="imgholder">
+					<img src="{{ MEDIA_URL }}{{ each.main_image }}" />
+				</div>
+				<a class="product-name" href="#">{{ each.name }}</a> <br />
+				<span class="price">Kshs {{ each.price | intcomma }}</span>
+				<a class="add btn btn-primary" data-item="{{ each.id }}"><i class="w-glyphicon-circle-plus"></i> Add to cart</a>
+			</div>
+		{% endfor %}
+    </div>
+{% endblock %}
+    
+{% block extra_js%}
+	<script src="{{ STATIC_URL }}js/jquery.tiles.min.js"></script>
+
+{% endblock %}
+

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Electronix | {% block title%} {% endblock %}</title>
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>base</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Denny" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/glyphicons.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/scroll-to-top.css">
+		
+		{% block extra_css %} {% endblock %}
+		{% block device_detect %} {% endblock %}
+		
+	</head>
+	{% load webdesign %}
+	<body id="page-top">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+      		<div class="navbar-inner">
+        		<div class="container-fluid">
+          			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"> </span>
+            			<span class="icon-bar"> </span>
+            			<span class="icon-bar"> </span>
+          			</a>
+          			<a class="brand" href="">Electronix</a>
+          			<div class="nav-collapse">
+            			<ul class="nav">
+              				<li><a href="{% url 'catalog.views.all_products' %}"><i class="w-glyphicon-home"></i> Home</a></li>
+              				<li><a href="{% url 'contact.views.contact' %}"><i class="w-glyphicon-envelope"></i> Contact Us</a></li>
+              				<li><a href="#"><i class="w-glyphicon-group"></i> Blog</a></li>
+            			</ul>
+            			<form action="" id="searchform" method="post" class="navbar-search">{% csrf_token %}
+  							<input type="text" id="mysearch" placeholder="Search..." autocomplete="off"/>
+  							<input type="submit" id="search" value="" >
+  						</form>
+            			<div id="suggestions">
+            				<div id="searchresults">
+            				</div>
+    					</div>
+    				
+					<ul class="nav pull-right">
+						<li><a href="#"><i class="w-glyphicon-user"></i> Sign in</a></li>
+						<li class="divider-vertical"></li>
+            			<li><a href="javascript:;" title="Items in cart" onclick="myCart()" class="myCart"><i class="icon-shopping-cart icon-white"></i>&nbsp;<div id="items">0</div></a></li>
+            		</ul>
+          			</div>
+        		</div>
+      		</div>
+  		</div>
+  		
+  		{% block new_products_slideshow %} {% endblock %}
+  		{% block categories %}
+  			<div class="span3">
+          		<div class="sidebar-nav">
+            	<ul class="nav nav-list">
+              <li class="nav-header">Browse by category</li>
+              <li class="active"><a href="#">All products</a></li>
+              <li><a href="#">Desktop Computers</a></li>
+              <li><a href="#">Laptops &amp; Notebooks</a></li>
+              <li><a href="#">Tablets</a></li>
+              <li><a href="#">Motherboards &amp Processors</a></li>
+              <li><a href="#">Home appliances</a></li>
+            </ul>
+          </div>
+        </div>
+       {% endblock %}
+  		{% block main_content %} {% endblock %}
+  		{% block right-bar %}
+  			<div class="grid ads span3">
+  				<p><a href=""><img src="{{ STATIC_URL }}images/intel-ad.png" alt="intel-ad" /></a></p>
+  				<p><a href=""><img src="{{ STATIC_URL }}images/Tablet-mega-sales.jpg" alt="Tablet-ad" /></a></p>
+  			</div>
+  		{% endblock %}
+  		<div id="footer">
+			<div class="inner">
+				<ul class="horizontal">
+					<li><a href="index.html">POLICY</a></li>
+					<li><a href="policy">PRIVACY</a></li>
+					<li><a href="tos">TERMS OF USE</a></li>
+					<li><a href="/jobs/">JOBS</a></li>
+					<li><a href="tos">ADVERTISING</a></li>
+					<li><a href="sample-contact.html">CONTACT</a></li>
+				</ul>
+				<p id="copyright-and-such">
+					Copyright &copy; {{ year }} - Sniper Inc. - All rights reserved.
+				</p>
+				<a id="scroll-top" href="#page-top">TOP</a>
+			</div>
+		</div>
+  		
+  		<div id="popup" class="span6" style="display: none">
+        	<span class="button b-close"><span>&times;</span></span>
+        	<div id="popupContent">
+        	<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><strong>Items</strong></th>
+        <th><strong>Quantity</strong></th>
+        <th><strong>Price (KShs)</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  			<a class="btn btn-primary b-close" href="javascript:;">Continue shopping &raquo;</a>&nbsp; &nbsp;
+        	<a class="btn btn-primary" href="{% url 'checkout.views.checkout' %}"><i class="icon-ok icon-white"></i> Check out</a>
+    	</div>
+    	</div>
+  		
+  		<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+  		<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+  		<script src="{{ STATIC_URL }}js/bootstrap-ajax.js"></script>
+  		<script src="{{ STATIC_URL }}js/tooltip.js"></script>
+  		<script src="{{ STATIC_URL }}js/jquery.dotdotdot.min.js"></script>
+  		<script type="text/javascript" src="{{ STATIC_URL }}js/scroll-to-top.js"></script>
+  		<script src="{{ STATIC_URL }}js/jquery.bpopup.min.js"></script>
+  		<script src="{{ STATIC_URL }}js/cufon-yui.js"></script>
+  		<script src="{{ STATIC_URL }}js/cufon-replace.js"></script>
+  		<script src="{{ STATIC_URL }}js/League_Gothic_400.font.js"></script>
+  		{% block extra_js %} {% endblock %}
+  		<script src="{{ STATIC_URL }}js/main.js"></script>
+  		<script>
+  		
+  		/*$(function(){
+  			$('.product-name').each(function(){
+  				var currentValue = ($(this)).text();
+  				if (currentValue.length > 35) {
+  					currentValue = currentValue.substring(0, 35) + "...";
+  					$(this).text(currentValue);
+  				}
+  			})
+  		});*/
+  		
+  		function getCookie(name){
+	var cookieValue = null;
+	if(document.cookie && document.cookie !=''){
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++){
+			var cookie = jQuery.trim(cookies[i]);
+			if (cookie.substring(0, name.length + 1) == (name + '=')){
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
+				}
+			}
+		}
+		return cookieValue;
+	}
+	
+var csrftoken = getCookie('csrftoken');
+	
+function csrfSafeMethod(method){
+	return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	}
+	
+function sameOrigin(url){
+	var host = document.location.host;
+	var protocol = document.location.protocol;
+	var sr_origin = '//' + host;
+	var origin = protocol + sr_origin;
+	return (url == origin || url.slice(0, origin.length + 1) == origin + '/') || (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') || !(/^(\/\/|http:|https:).*/.test(url));
+	}
+	
+			$.ajaxSetup({
+				cache: false,
+				beforeSend: function(xhr, settings){
+					if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+						// Send the token to same-origin, relative URLs only.
+						// Send the token only if the method warrants CSRF protection
+						// Using the CSRFToken value acquired earlier
+						xhr.setRequestHeader("X-CSRFToken", csrftoken);
+						}
+				},
+				error: function(xhr, status, error) {   
+					alert('An error occurred: ' + error);
+				}
+			});
+  			function myCart(){
+				$('#popup').bPopup({
+					positionStyle: 'absolute',
+				});};
+				
+			var total_cart_items = 0;
+			
+			$(function(){
+				$.ajax({
+					type: 'GET',
+					url: '{% url "cart.views.cart" %}',
+					dataType: 'json',
+					success: function(cart){
+						cart = JSON.parse(JSON.stringify(cart));
+						total_cart_items = cart.cart_items.length
+						$('#items').html(total_cart_items);
+						if (cart.cart_items.length == 0){
+							$('#popupContent').html('There are currently no items in your shopping cart.');
+						}
+						for (var i = 0; i < cart.cart_items.length; i++){
+							$('.table').append('<tr>' +
+											      	  '<td>' + cart.cart_items[i].product + '</td>' +
+											          '<td>' + '<div id="' + cart.cart_items[i].cart_item_id + '"><select class="quantity" style="width:50px;" data-product="' + cart.cart_items[i].cart_item_id + '"></select></div></td>' +
+											          '<td>' + cart.cart_items[i].product_price_gross + '</td>' +
+											          '<td><a href="javascript:;" onclick="delete_item(' + cart.cart_items[i].cart_item_id + ')" class="delete_item" data-cart_item_id="' + cart.cart_items[i].cart_item_id + '"><i class="glyphicon-remove-2"></i></a></td></tr>');
+							var quantitySelect = "#" + cart.cart_items[i].cart_item_id + ' select';
+							var select = $(quantitySelect);
+							for (var j = 1; j <= cart.cart_items[i].stock_amount; j++){
+								select.append('<option>' + j + '</option>');
+							}
+						}
+						$('.table tr:last').after('<tr id="last_row">' +
+												  '<th><strong>Sub-total</strong></th>' +
+												  '<th></th>' +
+												  '<th id="cart-total">' + cart.total + '</th><th></th></tr>');
+						$('.quantity').on('change', function(){
+							changeItemQuantity($(this).attr('data-product'), $(this).val(), $(this));
+						})
+					}
+				})
+			});
+			
+			function changeItemQuantity(cart_item_id, quantity, $this){
+				$.ajax({
+					type: 'GET',
+					url: "{% url 'cart.views.cart_item_total' item_id=123 quantity=1 %}".replace(/123/, cart_item_id).replace(/1/, quantity),
+					dataType: 'json',
+					success: function(prices){
+						total_item_price = JSON.parse(JSON.stringify(prices));
+						$this.closest("td").next().html(prices.total_price);
+						$('#cart-total').html(prices.cart_total);
+					}
+				})
+			}
+			
+			$(function(){
+				$.get(
+					'{% url "cart.views.popular_products" %}',
+					function(popular_products){
+						$('.mainContent').append(popular_products);
+					},
+					'html'
+				)
+			});
+			
+			$('.add').on('click', function(){
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'cart.views.add_to_cart' product_id=12345 %}".replace(/12345/, $(this).attr('data-item')),
+				dataType: 'json',
+				success: function(cart_items){
+					var serializedJson = JSON.parse(JSON.stringify(cart_items));
+					total_cart_items += 1;
+					$('#items').html(total_cart_items);
+					var new_row = ('<tr>' +
+											'<td>' + serializedJson[0].name + '</td>' +
+											'<td>' + '<div id="' + serializedJson[0].id + '"><select id="select_'+ serializedJson[0].id +'" class="quantity span1" data-product="' + serializedJson[0].id + '"></select></div></td>' +
+											'<td>' + serializedJson[0].price + ' KShs</td>' +
+											'<td><a href="javascript:;"><i class="glyphicon-bin"></i></a></td></tr>');
+					if ($('.table').length === 0) {
+						var table = '<table class="table table-striped table-hover">' + 
+    								 '<thead><tr><th><strong>Product</strong></th>' +
+        							 '<th><strong>Quantity</strong></th>' +
+        							 '<th><strong>Price (KShs)</strong></th></tr></thead><tbody>' + new_row + '</tbody></table>'
+						$('#popupContent').html(table);
+					}
+					else{
+						$('#last_row').before(new_row);
+					}
+					var quantitySelect = "#" + serializedJson[0].id + ' select';
+					alert(quantitySelect);
+					var select = $(quantitySelect);
+					for (var i = 1; i <= serializedJson[0].stock_amount; i++){
+						select.append('<option>' + i + '</option>');
+					}
+					/*$('#items').empty();
+					$('#items').append(serializedJson.product)*/
+					/*var selectChanged = "#select_" + serializedJson[0].id;
+					$(selectChanged).on('change', function(){
+						total = 
+						get_total_price($(this).attr('data-product'));
+					})*/
+				}
+			})
+		})
+			
+	$('#mysearch').keyup(function(){
+		lookup($(this).val());
+	});
+			
+	function lookup(inputString){
+	 	if(inputString.length == 0){		//hide suggestions
+	 		$('#searchresults').empty()
+	 		$('#suggestions').hide();
+	 	}
+	 	else {			//make an AJAX call
+	 		$.getJSON(
+	 			'{% url "search.views.search" inputString="xyz" %}'.replace("xyz", inputString.toString()),
+	 			function(search_results){
+	 				$('#searchresults').empty();
+	 				suggestions = JSON.parse(JSON.stringify(search_results));
+	 				if (suggestions.length > 0){
+	 					for (var i = 0; i < suggestions.length; i++ ) {
+	 					$('#searchresults').append('<a href="/products/' + suggestions[i].slug + '">' +
+												   '<img src="/media/' +suggestions[i].main_image + '" class="floatleft" alt="account photo" />' + suggestions[i].name + '<br />' +
+												   '<span class="little-about">' + suggestions[i].short_description + '</span></a>'
+	 												
+	 					)
+	 				}
+	 				}
+	 				else{
+	 					$('#searchresults').append('No suggestions found for "' + inputString + '"')
+	 									   .css('background-color', 'white');
+	 				}
+	 				$('#suggestions').fadeIn();
+	 			}
+	 		);
+	 	}
+	}
+	
+	 var mouse_is_inside = false;
+$(document).ready(function(){
+	$('#mysearch').focus(function(){
+		mouse_is_inside=true;
+		}, function(){
+	        mouse_is_inside=false;
+	    });
+	$('body').mouseup(function(){
+		if(!mouse_is_inside){ 
+			$('#suggestions').fadeOut();}
+	    });
+	});
+				
+    		/*function loginform(){
+    			$.ajax({
+    				type: 'GET',
+    				url:'',
+    				dataType: 'html',
+    				success: function(loginform){
+    					$('#popup').animate({'width':'30%', 'height':'65%', 'margin-left':'5%', 'margin-bottom':'5%'});
+    					/*$('#popup').center();*/   
+    					$('#popupContent').html(loginform);
+    					alert('Hey');
+    					/*$('#shipName').focus();
+    					$('#shippin_billing_info').on('submit', function(e){
+    						e.preventDefault();
+    						get_user_email($(this).serialize());
+    					});
+    					$('#sameAsShipping').on('change', function(){
+    						shippin_billin($(this));
+    					})
+    				}
+    			})
+    		}*/
+    		
+    		function shippin_billin($this){
+    			if($this.is(':checked')){
+    				$('#billingInfo input:text').attr('disabled','disabled')
+    											.each(function(i){
+    												var valueFromShippingInfo = $('#shippingInfo input:text:eq('+i+')').val();
+    												$(this).val(valueFromShippingInfo);
+    											})
+    			}
+    			else{
+    				$('#billingInfo input:text').removeAttr('disabled');
+    			}
+    		}
+    		
+    		/*$('#sameAsShipping').on('change', function(){
+    			if($(this).is(':checked')){
+    				/*$('#billingInfo input:text').attr('disabled','disabled').each(function(i){
+    					var valueFromShippingInfo = $('#shippingInfo input:text:eq('+i+')').val();
+    					$(this).val( valueFromShippingInput );
+    				});
+    				alert('Check');
+    			} 
+    			else{
+    				$('#billingInfo input:text').removeAttr('disabled');
+    			}
+    		});
+    		
+    		function get_user_email(email){
+    			$.ajax({
+    				type: 'POST',
+    				data: email,
+    				url: '',
+    				success: function(){
+    					get_more_info();
+    				}
+    			})
+    		}
+    		
+    		function get_more_info(){
+    			alert('Billing n shipping addresses coming up...');
+    		}*/
+    		
+    		function delete_item(cart_item_id){
+    			$.ajax({
+    				type: 'POST',
+    				url: '{% url "cart.views.delete_cart_item" cart_item_id=12345 %}'.replace(/12345/, cart_item_id),
+    				success: function(){
+    					identifier = ".table a[data-cart_item_id=" + cart_item_id + "]";
+    					$(identifier).closest('tr').remove();
+    					total_cart_items -= 1;
+						$('#items').html(total_cart_items);
+						if (total_cart_items == 0 ) {
+							$('#popupContent').html('There are currently no items in your shopping cart.');
+						}
+    				}
+    			})
+    		}
+    		
+    		function commaSeparatePrice(price){
+    			while (/(\d+)(\d{3})/.test(price.toString())){
+    				price = price.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+    			}
+    			return price;
+    		}
+    		
+    		jQuery.fn.center = function(){
+    			this.css("position",'absolute');
+    			this.css("top", Math.max(0,(($(window).height() - $(this).outerHeight())/2) + 
+    			$(window).scrollTop()) + "px");
+    			this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth())/2) + 
+    			$(window).scrollLeft()) + "px");
+    			return this;
+    		}
+  		</script>
+		
+	</body>
+</html>

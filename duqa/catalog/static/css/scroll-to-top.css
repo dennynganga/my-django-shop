@@ -1,0 +1,84 @@
+
+.inner {
+	padding:0 4%;
+}
+
+#footer {
+	clear:both;
+	overflow:hidden;
+	border-top:1px solid #ccc;
+	margin-top:1em;
+	background:#444;
+}
+
+#footer a:hover{
+	color: #007fff;
+	text-decoration: underline;
+}
+
+#footer .inner {
+	padding:1em;
+}
+
+/* 
+* Footer right content 
+*/
+#footer  #copyright-and-such {
+	float:left;
+	margin-left: 1.5%;
+	color:#FFFFFF;
+	text-shadow:-1px -1px #111;
+}
+
+/* 
+* Scroll top link inside footer, 
+* but fixed relative to viewport
+*/
+#footer #scroll-top {
+	position:fixed; 
+	/* On top of everything */
+	z-index:9999; 
+	bottom:0;
+	right: 0.5%;
+	margin:0.9em;
+	display:inline-block;
+	padding:0.15em 0.5em;
+	border-radius:3px;
+	color:#fafafa;
+	text-decoration:none;
+	border:1px solid transparent;
+	background:#007FFF;
+	letter-spacing:1px;
+	text-transform:uppercase;
+}
+
+/* 
+* Up Arrow for the scroll top link 
+*/
+#footer #scroll-top:after {
+	content:"";
+	display:inline-block;
+	vertical-align:middle;
+	margin-left:0.35em;
+	width: 0;
+	height: 0;
+	border-left: 0.3em solid transparent;
+	border-right:  0.3em solid transparent;
+	border-bottom:  0.3em solid #fefefe;
+}
+
+
+/* 
+* When the viewport is 55em 
+* (15em wider than the 40em 
+* max-width for #content ) 
+* it gets a static postion to not 
+* overlap the content area 
+*/
+@media screen and (max-width: 55em) {
+	#footer #scroll-top {
+		float:right;
+		position:static;
+		margin:0;
+	}
+}

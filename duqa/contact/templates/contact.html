@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load webdesign %}
+{% block title%} Contact Us {% endblock %}
+
+{% block categories %} {% endblock %}
+
+{% block main_content %}
+	<div class="contact_form grid span6">
+		<h3>We love hearing from our most important customer...YOU!</h3>
+		<div class="the_content">
+				<p><img src="{{ STATIC_URL }}images/location.png" alt="Location" title="contact" class="bordered" /></p>
+				<h3>Fill out this simple form below to send us a message:</h3>
+				<p><div class="contact">
+				<form action="#" method="post" class="contact-form"> {% csrf_token %}
+				<p>Your Name (required)<br />
+				    <span><input type="text" name="your-name" value="" class="form-input" size="40" /></span> </p>
+				<p>Your Email (required)<br />
+				    <span class="wpcf7-form-control-wrap your-email"><input type="text" name="your-email" value="" class="form-input" size="40" /></span> </p>
+				<p>Subject<br />
+				    <span class="wpcf7-form-control-wrap your-subject"><input type="text" name="your-subject" value="" size="40" /></span> </p>
+				<p>Your Message<br />
+				    <textarea name="your-message" class="form-text-area"></textarea></p>
+				<p><input type="submit" class="btn btn-primary" value="Send" />
+					
+				</form></div></p>
+
+
+			</div>
+			<hr class="thick-hr" />
+			
+			<div class="span3">
+				<img style="margin: 0 -15px 0 0; float: right;" src="{{ STATIC_URL }}images/iphone-black.png" width="107" height="128" alt="Contact Us" />
+      			<h4>Contact Details</h4>
+      			<address>
+        			<b>+254 724 301536</b> <br />
+        			<a href="mailto:#">electronix@gmail.com</a>
+      			</address>
+    		</div>
+    
+    <div class="span2" style="float: right">
+      			<h4>Our Office</h4>
+      			<address>
+        			<b>Sniper Inc.</b><br />
+        			795 Folsom Ave, Suite 600<br>
+        			Nairobi, Kenya 12345<br>
+        			<a class="btn btn-primary" href="#">Get directions</a>
+      			</address>
+    </div>
+		
+	</div>
+{% endblock %}
+
+{% block right-bar %}
+
+	<div class="about-us grid span4">
+		<h3>About us</h3>
+		<img src="{{ STATIC_URL }}images/logo.png" style="float: left;"/>
+		{% lorem 4 p %}
+		Thanks, <br />
+		<strong>Sniper &trade;, Inc.</strong>
+	</div>
+
+{% endblock %}
+
+{% block extra_js %}
+	<script>
+	$(function(){
+		/* Cufon Font Replacement */
+	Cufon.replace('h1, h2, h3', { fontFamily: 'League Gothic' });
+	})
+	</script>
+{% endblock %}
